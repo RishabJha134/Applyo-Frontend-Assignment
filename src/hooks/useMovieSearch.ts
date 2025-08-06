@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { Movie, SearchFilters, PaginationInfo } from '@/types/movie';
 import { OMDbAPI } from '@/services/omdb';
 

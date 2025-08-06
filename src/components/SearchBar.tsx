@@ -137,7 +137,7 @@ export const SearchBar = ({ onSearch, loading }: SearchBarProps) => {
         {/* Search Tips */}
         <div className="text-center">
           <p className="text-sm text-gray-600 bg-gradient-to-r from-blue-50 to-purple-50 px-4 py-2 rounded-lg inline-block">
-            💡 <span className="font-medium">Pro tip:</span> Try searching for "Batman", "Avengers", or "Game of Thrones"
+            💡 <span className="font-medium">Pro tip:</span> Try searching for &quot;Batman&quot;, &quot;Avengers&quot;, or &quot;Game of Thrones&quot;
           </p>
         </div>
       </form>

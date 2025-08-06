@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import Image from 'next/image';
 import { MovieDetails } from '@/types/movie';
 import { OMDbAPI } from '@/services/omdb';
@@ -14,13 +14,7 @@ export const MovieDetailsModal = ({ imdbID, isOpen, onClose }: MovieDetailsModal
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (isOpen && imdbID) {
-      fetchMovieDetails();
-    }
-  }, [isOpen, imdbID]);
-
-  const fetchMovieDetails = async () => {
+  const fetchMovieDetails = useCallback(async () => {
     setLoading(true);
     setError(null);
     
@@ -31,12 +25,18 @@ export const MovieDetailsModal = ({ imdbID, isOpen, onClose }: MovieDetailsModal
       } else {
         setError('Movie details not found');
       }
-    } catch (err) {
+    } catch {
       setError('Failed to load movie details');
     } finally {
       setLoading(false);
     }
-  };
+  }, [imdbID]);
+
+  useEffect(() => {
+    if (isOpen && imdbID) {
+      fetchMovieDetails();
+    }
+  }, [isOpen, imdbID, fetchMovieDetails]);
 
   const handleBackdropClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
